@@ -87,10 +87,11 @@ C:/chromedriver-win64/chromedriver.exe
 2. Execute o arquivo `fechamento_pdv.py` (ou `.exe`, se empacotado).
 3. Uma janela será aberta com o botão **“Iniciar Fechamento”**.
 4. Clique no botão e o sistema:
-- Acessará automaticamente cada PDV
-- Simulará os inputs necessários
-- Aguardará 2 segundos entre os PDVs
-- Mostrará logs detalhados em tempo real
+- Acessa automaticamente os endereços locais de cada PDV
+- Simula os comandos de teclado usados no fechamento
+- Executa o fechamento de todos os PDVs em sequência
+- Exibe um log detalhado na interface durante a execução
+- Fecha automaticamente o navegador ao final do processo
 
 ---
 
