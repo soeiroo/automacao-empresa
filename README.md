@@ -106,8 +106,3 @@ Use com extrema responsabilidade:
 ❗ Um erro pode afetar o funcionamento dos caixas, da rede ou do sistema interno da loja.
 
 ---
-
-## 👨‍💻 Desenvolvido por
-
-**Pedro Soeiro**  
-Setor de CPD – Sobral
