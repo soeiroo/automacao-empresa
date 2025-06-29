@@ -1,6 +1,6 @@
 # 🧾 Fechamento Automático dos PDVs (1 a 39)
 
-Este programa automatiza o processo de **fechamento de caixa de todos os PDVs** da loja (do 1 ao 39), utilizando o navegador Brave e a biblioteca Selenium.
+Este programa automatiza o processo de **fechamento de caixa de todos os PDVs** da loja (do 1 ao 41), utilizando o navegador Brave e a biblioteca Selenium.
 
 ---
 
@@ -8,7 +8,6 @@ Este programa automatiza o processo de **fechamento de caixa de todos os PDVs** 
 
 - Acessa automaticamente os endereços locais de cada PDV
 - Simula os comandos de teclado usados no fechamento
-- Aguarda 2 segundos entre cada PDV
 - Exibe um log detalhado na interface durante a execução
 - Fecha automaticamente o navegador ao final do processo
 
@@ -16,10 +15,10 @@ Este programa automatiza o processo de **fechamento de caixa de todos os PDVs** 
 
 ## 📋 PDVs processados
 
-- **PDVs 1 a 39**
+- **PDVs 1 a 41**
 - ❌ **Exceções**:
   - **PDV 34** está desativado (não será processado)
-  - **PDV 29** usa IP personalizado: http://192.168.222.179:9898/normal.html
+  - **PDV 41** usa IP personalizado: http://192.168.222.179:9898/normal.html
 
 ---
 
@@ -107,3 +106,4 @@ Use com extrema responsabilidade:
 ❗ Um erro pode afetar o funcionamento dos caixas, da rede ou do sistema interno da loja.
 
 ---
+
