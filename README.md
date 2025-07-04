@@ -1,109 +1,85 @@
-# 🧾 Fechamento Automático dos PDVs (1 a 41)
+# 🏢 Automação Empresa – Controle de PDVs com Python
 
-Este programa automatiza o processo de **fechamento de caixa de todos os PDVs** da loja (do 1 ao 41), utilizando o navegador Brave e a biblioteca Selenium.
+Automação de processos internos para o gerenciamento e controle de Pontos de Venda (PDVs) em uma rede corporativa. Este projeto foi desenvolvido para facilitar tarefas repetitivas através de uma interface gráfica simples e uso de automação via Selenium.
 
----
-
-## 🚀 Funcionalidades
-
-- Acessa automaticamente os endereços locais de cada PDV
-- Simula os comandos de teclado usados no fechamento
-- Exibe um log detalhado na interface durante a execução
-- Fecha automaticamente o navegador ao final do processo
+![Badge](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Python](https://img.shields.io/badge/python-3.11-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
-## 📋 PDVs processados
+## 📌 Funcionalidades
 
-- **PDVs 1 a 41**
-- ❌ **Exceções**:
-  - **PDV 34** está desativado (não será processado)
-  - **PDV 41** usa IP personalizado: http://192.168.222.179:9898/normal.html
-
----
-
-## 🖥️ Requisitos do Sistema
-
-### ✅ Requisitos obrigatórios:
-
-| Requisito       | Detalhes                                                                 |
-|-----------------|--------------------------------------------------------------------------|
-| Python          | Versão 3.10 ou superior                                                   |
-| Selenium        | Instalar com pip install selenium                                      |
-| Brave Browser   | Deve estar instalado no caminho abaixo                                   |
-| ChromeDriver    | Mesma versão do Chromium usado pelo Brave                                |
+- 🧠 **Automação Inteligente**: Automatiza ações repetitivas nos PDVs, ignorando máquinas fora do ar.
+- 💻 **Interface Gráfica (Tkinter)**: Usabilidade simplificada com uma tela interativa.
+- 🚀 **Execução Rápida em Lote**: Processa múltiplos PDVs em sequência.
+- ⚠️ **Tratamento de Exceções**: Ignora PDVs específicos (como o 34) e prossegue sem travamentos.
+- 🪪 **Login Automatizado**: Uso de Selenium para autenticação e execução remota.
 
 ---
 
-## 📦 Instalação dos Requisitos
+## 🖼️ Demonstração
 
-### 🔹 1. Instale o Selenium
+![screenshot](docs/image.png)
 
-No terminal ou prompt de comando:
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- [Python 3.11+](https://www.python.org/)
+- [Selenium](https://selenium-python.readthedocs.io/)
+- [Tkinter](https://docs.python.org/3/library/tkinter.html)
+- [ChromeDriver](https://sites.google.com/chromium.org/driver/)
+
+---
+
+## 📦 Instalação
+
+Clone o projeto:
+
 ```bash
-pip install selenium
+git clone https://github.com/soeiroo/automacao-empresa.git
+cd automacao-empresa
 ```
 
----
+Instale os requisitos:
 
-### 🔹 2. Instale o Brave
-
-Baixe o navegador Brave diretamente pelo site oficial:  
-🔗 https://brave.com/pt-br/download/
-
-O Brave deve estar instalado neste caminho padrão (necessário para o script funcionar):
-```yaml
-C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe
+```bash
+pip install -r requirements.txt
 ```
 
----
-
-### 🔹 3. Instale o ChromeDriver
-
-O ChromeDriver permite que o Selenium controle o Brave. Ele **deve ter a mesma versão do Chromium usada pelo Brave**.
-
-#### Passos:
-1. Abra o Brave e acesse:
-```yaml
-brave://version
-```
-2. Verifique a versão do Chromium (ex: `120.0.6099.71`)
-3. Acesse o site oficial:
-🔗 https://chromedriver.chromium.org/downloads
-4. Baixe o ChromeDriver da **mesma versão**.
-5. Extraia e coloque o `chromedriver.exe` em:
-```yaml
-C:/chromedriver-win64/chromedriver.exe
-```
-
-✅ **Dica:** mantenha o nome da pasta e o caminho exatos para evitar erros de execução.
+Configure o caminho do `chromedriver` no sistema, se necessário.
 
 ---
 
 ## ▶️ Como usar
 
-1. Certifique-se de que todos os requisitos estão instalados corretamente.
-2. Execute o arquivo `fechamento_pdv.py` (ou `.exe`, se empacotado).
-3. Uma janela será aberta com o botão **“Iniciar Fechamento”**.
-4. Clique no botão e o sistema:
-- Acessa automaticamente os endereços locais de cada PDV
-- Simula os comandos de teclado usados no fechamento
-- Executa o fechamento de todos os PDVs em sequência
-- Exibe um log detalhado na interface durante a execução
-- Fecha automaticamente o navegador ao final do processo
+1. Execute o script principal com a interface:
+
+```bash
+python fechamento-automacaov2.py
+```
+
+2. Clique em **"Iniciar Automação"**.
+3. O sistema passará por todos os PDVs (exceto os definidos como exceção, como o PDV 34).
 
 ---
 
-## ⚠️ Aviso de Responsabilidade
+## 📌 Exceções personalizadas
 
-Este programa interage diretamente com os sistemas dos PDVs.  
-Use com extrema responsabilidade:
-
-- Apenas com **autorização da equipe de TI**
-- Nunca execute durante o expediente da loja
-- Sempre revise os comandos antes de usar
-
-❗ Um erro pode afetar o funcionamento dos caixas, da rede ou do sistema interno da loja.
+- PDVs podem ser excluídos do processo.
+- O PDV **34** é ignorado automaticamente no script, por motivo de instabilidade.
 
 ---
 
+## 🤝 Contribuições
+
+Sinta-se livre para enviar pull requests ou abrir issues. Sugestões são bem-vindas!
+
+---
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+
+---
