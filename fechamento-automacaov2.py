@@ -3,18 +3,20 @@ from tkinter.scrolledtext import ScrolledText
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
 import threading
 import time
 
 # ======================= CONFIGURAÇÃO ==========================
-CAMINHO_CHROMEDRIVER = "C:/chromedriver_win32/chromedriver.exe"
+CAMINHO_CHROMEDRIVER = "C:/chromedriver-win64/chromedriver.exe"
 CAMINHO_BRAVE = "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
 # ==============================================================
 
 def iniciar_fechamento(log_func):
     options = webdriver.ChromeOptions()
     options.binary_location = CAMINHO_BRAVE
-    driver = webdriver.Chrome(executable_path=CAMINHO_CHROMEDRIVER, options=options)
+    service = Service(executable_path=CAMINHO_CHROMEDRIVER)
+    driver = webdriver.Chrome(service=service, options=options)
 
     desativados = [34]
     personalizados = {41: "http://192.168.222.179:9898/normal.html"}
@@ -29,22 +31,47 @@ def iniciar_fechamento(log_func):
                 log_func(f"⚠️ PDV {pdv_num} fora do ar ou inacessível: {acesso_erro}\n")
                 return
 
-            time.sleep(0.7)
+            time.sleep(1)
 
-            body = driver.find_element(By.TAG_NAME, 'body')
+            # Tenta focar em um input, se existir
+            try:
+                input_elem = driver.find_element(By.TAG_NAME, 'input')
+                input_elem.click()
+                input_elem.clear()
+                body = input_elem
+            except Exception:
+                # Se não houver input, clica no body
+                body = driver.find_element(By.TAG_NAME, 'body')
+                body.click()
 
+            time.sleep(2)
             body.send_keys("112")
-            time.sleep(0.3)
+            time.sleep(1)
             body.send_keys(Keys.TAB)
-            time.sleep(0.3)
+            time.sleep(1)
+
+            # Recarrega a página antes de inserir o 460794
+            driver.refresh()
+            time.sleep(2)
+
+            # Refoca após refresh
+            try:
+                input_elem = driver.find_element(By.TAG_NAME, 'input')
+                input_elem.click()
+                input_elem.clear()
+                body = input_elem
+            except Exception:
+                body = driver.find_element(By.TAG_NAME, 'body')
+                body.click()
+
             body.send_keys("460794")
-            time.sleep(0.3)
+            time.sleep(1)
             body.send_keys(Keys.ENTER)
-            time.sleep(0.3)
+            time.sleep(1)
             body.send_keys("123")
-            time.sleep(0.3)
+            time.sleep(1)
             body.send_keys(Keys.ENTER)
-            time.sleep(0.3)
+            time.sleep(1)
 
             log_func(f"✅ PDV {pdv_num} fechado com sucesso.\n")
         except Exception as e:
