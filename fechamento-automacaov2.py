@@ -44,15 +44,15 @@ def iniciar_fechamento(log_func):
                 body = driver.find_element(By.TAG_NAME, 'body')
                 body.click()
 
-            time.sleep(2)
+            time.sleep(0.3)
             body.send_keys("112")
-            time.sleep(1)
+            time.sleep(0.3)
             body.send_keys(Keys.TAB)
-            time.sleep(1)
+            time.sleep(0.3)
 
             # Recarrega a página antes de inserir o 460794
             driver.refresh()
-            time.sleep(2)
+            time.sleep(1)
 
             # Refoca após refresh
             try:
@@ -65,13 +65,13 @@ def iniciar_fechamento(log_func):
                 body.click()
 
             body.send_keys("460794")
-            time.sleep(1)
+            time.sleep(0.3)
             body.send_keys(Keys.ENTER)
-            time.sleep(1)
+            time.sleep(0.3)
             body.send_keys("123")
-            time.sleep(1)
+            time.sleep(0.3)
             body.send_keys(Keys.ENTER)
-            time.sleep(1)
+            time.sleep(0.3)
 
             log_func(f"✅ PDV {pdv_num} fechado com sucesso.\n")
         except Exception as e:
