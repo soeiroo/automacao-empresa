@@ -1,4 +1,4 @@
-# 🧾 Fechamento Automático dos PDVs (1 a 39)
+# 🧾 Fechamento Automático dos PDVs (1 a 41)
 
 Este programa automatiza o processo de **fechamento de caixa de todos os PDVs** da loja (do 1 ao 41), utilizando o navegador Brave e a biblioteca Selenium.
 
