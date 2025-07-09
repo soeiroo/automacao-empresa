@@ -101,7 +101,7 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
             body.send_keys(Keys.ENTER)
             time.sleep(0.3)
             body.send_keys(Keys.ESCAPE)
-            time.sleep(0.3)
+            time.sleep(0.8)
 
             log_func(f"✅ PDV {pdv} fechado com sucesso.\n")
         except Exception as e:
