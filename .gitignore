@@ -2,3 +2,6 @@ teste-automacao-youtube.py
 Instruções.txt
 dist/
 node_modules/
+log_fechamento_PDVs.txt
+flask.log
+__pycache__/

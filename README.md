@@ -15,6 +15,8 @@ Automação de processos internos para o gerenciamento e controle de Pontos de V
 - 🚀 **Execução Rápida em Lote**: Processa múltiplos PDVs em sequência.
 - ⚠️ **Tratamento de Exceções**: Ignora PDVs específicos (como o 34) e prossegue sem travamentos.
 - 🪪 **Login Automatizado**: Uso de Selenium para autenticação e execução remota.
+- 🧩 **Configuração Centralizada**: Caminhos como `chromedriver` e `brave` são definidos em um único arquivo (`src/common/config.py`).
+- 🧠 **Suporte Multiplataforma**: Detecta automaticamente se está rodando em Windows ou Linux.
 
 ---
 
@@ -30,6 +32,7 @@ Automação de processos internos para o gerenciamento e controle de Pontos de V
 - [Selenium](https://selenium-python.readthedocs.io/)
 - [Tkinter](https://docs.python.org/3/library/tkinter.html)
 - [ChromeDriver](https://sites.google.com/chromium.org/driver/)
+- [Brave Browser](https://brave.com/)
 
 ---
 
@@ -48,27 +51,40 @@ Instale os requisitos:
 pip install -r requirements.txt
 ```
 
-Configure o caminho do `chromedriver` no sistema, se necessário.
+---
+
+## ⚙️ Configuração
+
+Edite o arquivo `src/common/config.py` para garantir que os caminhos para o ChromeDriver e Brave estejam corretos para seu sistema.
+
+O projeto já detecta automaticamente se você está em **Linux** ou **Windows**.
 
 ---
 
 ## ▶️ Como usar
 
-1. Execute o script principal com a interface:
+1. Acesse a pasta `src`:
+
+```bash
+cd src
+```
+
+2. Execute o script principal com a interface:
 
 ```bash
 python fechamento-automacaov2.py
 ```
 
-2. Clique em **"Iniciar Automação"**.
-3. O sistema passará por todos os PDVs (exceto os definidos como exceção, como o PDV 34).
+3. Clique em **"Iniciar Fechamento"**.
+4. O sistema passará por todos os PDVs (exceto os definidos como exceção, como o PDV 34).
 
 ---
 
 ## 📌 Exceções personalizadas
 
-- PDVs podem ser excluídos do processo.
+- PDVs podem ser excluídos do processo manualmente pela interface.
 - O PDV **34** é ignorado automaticamente no script, por motivo de instabilidade.
+- O PDV **41** possui um link personalizado já tratado no código.
 
 ---
 
@@ -81,5 +97,3 @@ Sinta-se livre para enviar pull requests ou abrir issues. Sugestões são bem-vi
 ## 📄 Licença
 
 Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
-
----
