@@ -26,7 +26,7 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
     else:
         driver = None  # placeholder para evitar erro em referência
 
-    desativados = [34]
+    desativados = [34, 40]
     personalizados = {41: "http://192.168.222.179:9898/normal.html"}
     ignorar_pdvs = set(desativados + ignorar_pdvs)
 
