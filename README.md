@@ -83,7 +83,7 @@ python fechamento-automacaov2.py
 ## 📌 Exceções personalizadas
 
 - PDVs podem ser excluídos do processo manualmente pela interface.
-- O PDV **34** é ignorado automaticamente no script, por motivo de instabilidade.
+- Os PDV's **34 e 40** são ignorados automaticamente no script, por motivo de instabilidade.
 - O PDV **41** possui um link personalizado já tratado no código.
 
 ---
