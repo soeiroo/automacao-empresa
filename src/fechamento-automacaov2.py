@@ -24,7 +24,7 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
         service = Service(executable_path=CAMINHO_CHROMEDRIVER)
         driver = webdriver.Chrome(service=service, options=options)
     else:
-        driver = None  # placeholder para evitar erro em referência
+        driver = None
 
     desativados = [34, 40]
     personalizados = {41: "http://192.168.222.179:9898/normal.html"}
@@ -36,7 +36,6 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
             continue
 
         url = personalizados.get(pdv, f"http://192.168.222.{100 + pdv}:9898/normal.html")
-
         log_func(f"{'🧪 Simulando' if modo_simulacao else '▶️ Verificando status e fechando'} PDV {pdv}...")
 
         if modo_simulacao:
@@ -54,17 +53,25 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
 
         # Verificar se a div indica "Fechado Parcial"
         try:
-            div = driver.find_element(By.CSS_SELECTOR, 'div[style="display: inline-block; width: 50%; text-align: center; overflow: hidden; white-space: nowrap;"]')
+            div = driver.find_element(By.XPATH, "//div[contains(text(), 'Fechado') or contains(text(), 'Disponivel') or contains(text(), 'Disponível')]")
             texto_div = div.text.strip().lower()
-            if not texto_div.startswith("fechado parcial"):
-                log_func(f"⏩ PDV {pdv} não está com status 'Fechado Parcial*', pulando...\n")
+
+            if "fechado parcial" in texto_div:
+                log_func(f"🔍 PDV {pdv} com status 'Fechado Parcial', iniciando fechamento...")
+            elif "fechado" in texto_div:
+                log_func(f"ℹ️ PDV {pdv} já está fechado. Pulando...\n")
+                continue
+            elif "disponivel" in texto_div or "disponível" in texto_div:
+                log_func(f"🔓 PDV {pdv} ainda está disponível. Pulando...\n")
+                continue
+            else:
+                log_func(f"⚠️ PDV {pdv} com status não reconhecido: '{texto_div}', pulando...\n")
                 continue
         except Exception:
-            log_func(f"⚠️ PDV {pdv}: div de status não encontrada, pulando...\n")
+            log_func(f"⚠️ PDV {pdv}: status não detectado (div ausente ou diferente), pulando...\n")
             continue
 
         try:
-            # Interações para fechar o PDV
             try:
                 input_elem = driver.find_element(By.TAG_NAME, 'input')
                 input_elem.click()
@@ -112,7 +119,6 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
 
     log_func("✅ Processo concluído!")
 
-    # Salvar log em arquivo
     with open("log_fechamento_PDVs.txt", "w", encoding="utf-8") as f:
         f.write(salvar_log.get("1.0", tk.END))
 
@@ -124,7 +130,6 @@ def criar_interface():
     frame_inputs = tk.Frame(janela)
     frame_inputs.pack(pady=10)
 
-    # Entradas principais
     tk.Label(frame_inputs, text="Crachá:").grid(row=0, column=0, padx=5, sticky="e")
     entrada_cracha = tk.Entry(frame_inputs)
     entrada_cracha.grid(row=0, column=1, padx=5)
@@ -145,12 +150,10 @@ def criar_interface():
     entrada_ignorar = tk.Entry(frame_inputs, width=25)
     entrada_ignorar.grid(row=2, column=2, columnspan=2, padx=5)
 
-    # Checkbox: modo simulação
     modo_simulacao_var = tk.BooleanVar()
     checkbox_simulacao = tk.Checkbutton(janela, text="✔️ Modo Simulação (não abre navegador)", variable=modo_simulacao_var)
     checkbox_simulacao.pack()
 
-    # Área de log
     log_area = ScrolledText(janela, font=("Consolas", 10), width=85, height=23)
     log_area.pack(pady=10)
 
@@ -205,4 +208,3 @@ def criar_interface():
 
 if __name__ == "__main__":
     criar_interface()
-
