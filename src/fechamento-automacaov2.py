@@ -14,7 +14,6 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 common_path = os.path.join(current_dir, "common")
 sys.path.append(common_path)
 
-# Agora pode importar normalmente
 from config import CAMINHO_CHROMEDRIVER, CAMINHO_BRAVE
 
 def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdvs, salvar_log, modo_simulacao):
@@ -51,9 +50,8 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
 
         time.sleep(1)
 
-        # Verificar se a div indica "Fechado Parcial"
         try:
-            div = driver.find_element(By.XPATH, "//div[contains(text(), 'Fechado') or contains(text(), 'Disponivel') or contains(text(), 'Disponível')]")
+            div = driver.find_element(By.CSS_SELECTOR, 'div[style="display: inline-block; width: 50%; text-align: center; overflow: hidden; white-space: nowrap;"]')
             texto_div = div.text.strip().lower()
 
             if "fechado parcial" in texto_div:
@@ -61,14 +59,14 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
             elif "fechado" in texto_div:
                 log_func(f"ℹ️ PDV {pdv} já está fechado. Pulando...\n")
                 continue
-            elif "disponivel" in texto_div or "disponível" in texto_div:
+            elif "disponível" in texto_div or "disponivel" in texto_div:
                 log_func(f"🔓 PDV {pdv} ainda está disponível. Pulando...\n")
                 continue
             else:
                 log_func(f"⚠️ PDV {pdv} com status não reconhecido: '{texto_div}', pulando...\n")
                 continue
         except Exception:
-            log_func(f"⚠️ PDV {pdv}: status não detectado (div ausente ou diferente), pulando...\n")
+            log_func(f"⚠️ PDV {pdv}: div de status não encontrada, pulando...\n")
             continue
 
         try:
