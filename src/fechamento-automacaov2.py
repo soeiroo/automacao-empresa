@@ -44,6 +44,11 @@ def iniciar_fechamento(log_func, cracha, senha, pdv_inicio, pdv_fim, ignorar_pdv
 
         try:
             driver.get(url)
+            time.sleep(1)
+            if "404" in driver.title or "Not Found" in driver.title:
+                log_func(f"⚠️ PDV {pdv} não encontrado (404 Not Found), pulando...\n")
+                continue
+    
         except Exception as acesso_erro:
             log_func(f"⚠️ PDV {pdv} fora do ar ou inacessível: {acesso_erro}\n")
             continue
